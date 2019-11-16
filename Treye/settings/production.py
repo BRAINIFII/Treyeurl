@@ -144,6 +144,8 @@ STATIC_ROOT = os.path.join(BASE_DIR,"static")
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+
 SHORTCODE_MAX = 10
 
 SHORTCODE_MIN = 4
