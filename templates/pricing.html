@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Pricing</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900');
+
+        :root {
+          --text-color: hsla(210, 50%, 85%, 1);
+          --shadow-color: hsla(210, 40%, 52%, .4);
+          --btn-color: hsl(210, 80%, 42%);
+          --bg-color: #141218;
+        }
+        h1.header {
+            margin: 0 0 10px;
+            padding: 0;
+        
+            color: rgb(255, 255, 255);
+        }
+
+        body {
+            background-color:#16181a;
+            z-index:1;
+            overflow-y:hidden;
+            overflow-x:hidden;
+        }
+        
+        .box
+        {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            transform: translate(-50%,-50%);
+        }
+        input
+            {
+                position: relative;
+                display: inline-block;
+                font-size: 20px;
+                box-sizing: border-box;
+                transition: .5s;
+            }
+            input[type="text"]
+            {
+                background: #ffffffb2;
+                
+                height: 50px;
+                border: none;
+                outline: none;
+            }
+        button {
+          position:relative;
+          padding: 2px 5px;  
+          border: none;
+          background: none;
+          cursor: pointer;
+          
+          font-family: "Source Code Pro";
+          text-transform: uppercase;
+          font-size: 20px;  
+          color: var(--text-color);
+          
+          background-color: var(--btn-color);
+          box-shadow: var(--shadow-color) 2px 2px 22px;
+          border-radius: 4px; 
+          z-index: 0;  
+          overflow: hidden;   
+        }
+        
+        button:focus {
+          outline-color: transparent;
+          box-shadow: var(--btn-color) 2px 2px 22px;
+        }
+        
+        .right::after, button::after {
+          content: var(--content);
+          display: block;
+          position: absolute;
+          white-space: nowrap;
+          padding: 40px 40px;
+          pointer-events:none;
+        }
+        
+        button::after{
+          font-weight: 200;
+          top: -30px;
+          left: -20px;
+        } 
+        
+        .right, .left {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+        }
+        .right {
+          left: 66%;
+        }
+        .left {
+          right: 66%;
+        }
+        .right::after {
+          top: -30px;
+          left: calc(-66% - 20px);
+          
+          background-color: var(--bg-color);
+          color:transparent;
+          transition: transform .4s ease-out;
+          transform: translate(0, -90%) rotate(0deg)
+        }
+        
+        button:hover .right::after {
+          transform: translate(0, -47%) rotate(0deg)
+        }
+        
+        button .right:hover::after {
+          transform: translate(0, -50%) rotate(-7deg)
+        }
+        
+        button .left:hover ~ .right::after {
+          transform: translate(0, -50%) rotate(7deg)
+        }
+        
+        /* bubbles */
+        button::before {
+          content: '';
+          pointer-events: none;
+          opacity: .6;
+          background:
+            radial-gradient(circle at 20% 35%,  transparent 0,  transparent 2px, var(--text-color) 3px, var(--text-color) 4px, transparent 4px),
+            radial-gradient(circle at 75% 44%, transparent 0,  transparent 2px, var(--text-color) 3px, var(--text-color) 4px, transparent 4px),
+            radial-gradient(circle at 46% 52%, transparent 0, transparent 4px, var(--text-color) 5px, var(--text-color) 6px, transparent 6px);
+        
+          width: 100%;
+          height: 300%;
+          top: 0;
+          left: 0;
+          position: absolute;
+          animation: bubbles 5s linear infinite both;
+        }
+        
+        @keyframes bubbles {
+          from {
+            transform: translate();
+          }
+          to {
+            transform: translate(0, -66.666%);
+          }
+        }
+
+        
+        .pricing .card {
+          border: none;
+          border-radius: 1rem;
+          transition: all 0.2s;
+          box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing hr {
+          margin: 1.5rem 0;
+        }
+        
+        .pricing .card-title {
+          margin: 0.5rem 0;
+          font-size: 0.9rem;
+          letter-spacing: .1rem;
+          font-weight: bold;
+        }
+        
+        .pricing .card-price {
+          font-size: 3rem;
+          margin: 0;
+        }
+        
+        .pricing .card-price .period {
+          font-size: 0.8rem;
+        }
+        
+        .pricing ul li {
+          margin-bottom: 1rem;
+        }
+        
+        .pricing .text-muted {
+          opacity: 0.7;
+        }
+        
+        .pricing .btn {
+          font-size: 80%;
+          border-radius: 5rem;
+          letter-spacing: .1rem;
+          font-weight: bold;
+          padding: 1rem;
+          opacity: 0.7;
+          transition: all 0.2s;
+        }
+        
+        /* Hover Effects on Card */
+        
+        @media (min-width: 992px) {
+          .pricing .card:hover {
+            margin-top: -.25rem;
+            margin-bottom: .25rem;
+            box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
+          }
+          .pricing .card:hover .btn {
+            opacity: 1;
+          }
+        }
+</style>
+  </head>
+<section class="pricing py-5">
+        <div class="container">
+          <div class="row">
+            <!-- Free Tier -->
+            <div class="col-lg-4">
+              <div class="card mb-5 mb-lg-0">
+                <div class="card-body">
+                  <h5 class="card-title text-muted text-uppercase text-center">Free</h5>
+                  <h6 class="card-price text-center">₹0.00<span class="period">/month</span></h6>
+                  <hr>
+                  <ul class="fa-ul">
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited fast redirect</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>5000 clicks per month</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>500 total branded links</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Custom domain names</li>
+                    <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Custom report per month</li>
+                    <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Active Teammates</li>
+                    <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Free Subdomain</li>
+                    <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Monthly Status Reports</li>
+                  </ul>
+                  <a href="{% url 'signup' %}" class="btn btn-block btn-primary text-uppercase">Sign Up</a>
+                </div>
+              </div>
+            </div>
+            <!-- Plus Tier -->
+            <div class="col-lg-4">
+              <div class="card mb-5 mb-lg-0">
+                <div class="card-body">
+                  <h5 class="card-title text-muted text-uppercase text-center">Starter</h5>
+                  <h6 class="card-price text-center">₹79.00<span class="period">/month</span></h6>
+                  <hr>
+                  <ul class="fa-ul">
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited fast redirect</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>5000 clicks per month</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>500 total branded links</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Custom domain names</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Custom report per month</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Active Teammates</li>
+                    <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Free Subdomain</li>
+                    <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Monthly Status Reports</li>
+                  </ul>
+                  <a href="{% url 'signup' %}" class="btn btn-block btn-primary text-uppercase">Buy</a>
+                </div>
+              </div>
+            </div>
+            <!-- Pro Tier -->
+            <div class="col-lg-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-muted text-uppercase text-center">Pro</h5>
+                  <h6 class="card-price text-center">₹149.00<span class="period">/month</span></h6>
+                  <hr>
+                  <ul class="fa-ul">
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited fast redirect</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>5000 clicks per month</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>500 total branded links</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Custom domain names</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Custom report per month</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Active Teammates</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Free Subdomain</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>Monthly Status Reports</li>
+                  </ul>
+                  <a href="{% url 'signup' %}" class="btn btn-block btn-primary text-uppercase">Buy</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}
+</html>

@@ -1,0 +1,200 @@
+<html>
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <title>About</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900');
+
+        :root {
+          --text-color: hsla(210, 50%, 85%, 1);
+          --shadow-color: hsla(210, 40%, 52%, .4);
+          --btn-color: hsl(210, 80%, 42%);
+          --bg-color: #141218;
+        }
+        h1.header {
+            margin: 0 0 10px;
+            padding: 0;
+        
+            color: rgb(255, 255, 255);
+        }
+
+        body {
+            background-color:#1d1d1d;
+            z-index:1;
+            overflow-y:hidden;
+            overflow-x:hidden;
+        }
+        
+        .box
+        {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            transform: translate(-50%,-50%);
+        }
+        input
+            {
+                position: relative;
+                display: inline-block;
+                font-size: 20px;
+                box-sizing: border-box;
+                transition: .5s;
+            }
+            input[type="text"]
+            {
+                background: #ffffffb2;
+                
+                height: 50px;
+                border: none;
+                outline: none;
+            }
+        button {
+          position:relative;
+          padding: 2px 5px;  
+          border: none;
+          background: none;
+          cursor: pointer;
+          
+          font-family: "Source Code Pro";
+          text-transform: uppercase;
+          font-size: 20px;  
+          color: var(--text-color);
+          
+          background-color: var(--btn-color);
+          box-shadow: var(--shadow-color) 2px 2px 22px;
+          border-radius: 4px; 
+          z-index: 0;  
+          overflow: hidden;   
+        }
+        
+        button:focus {
+          outline-color: transparent;
+          box-shadow: var(--btn-color) 2px 2px 22px;
+        }
+        
+        .right::after, button::after {
+          content: var(--content);
+          display: block;
+          position: absolute;
+          white-space: nowrap;
+          padding: 40px 40px;
+          pointer-events:none;
+        }
+        
+        button::after{
+          font-weight: 200;
+          top: -30px;
+          left: -20px;
+        } 
+        
+        .right, .left {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+        }
+        .right {
+          left: 66%;
+        }
+        .left {
+          right: 66%;
+        }
+        .right::after {
+          top: -30px;
+          left: calc(-66% - 20px);
+          
+          background-color: var(--bg-color);
+          color:transparent;
+          transition: transform .4s ease-out;
+          transform: translate(0, -90%) rotate(0deg)
+        }
+        
+        button:hover .right::after {
+          transform: translate(0, -47%) rotate(0deg)
+        }
+        
+        button .right:hover::after {
+          transform: translate(0, -50%) rotate(-7deg)
+        }
+        
+        button .left:hover ~ .right::after {
+          transform: translate(0, -50%) rotate(7deg)
+        }
+        
+        /* bubbles */
+        button::before {
+          content: '';
+          pointer-events: none;
+          opacity: .6;
+          background:
+            radial-gradient(circle at 20% 35%,  transparent 0,  transparent 2px, var(--text-color) 3px, var(--text-color) 4px, transparent 4px),
+            radial-gradient(circle at 75% 44%, transparent 0,  transparent 2px, var(--text-color) 3px, var(--text-color) 4px, transparent 4px),
+            radial-gradient(circle at 46% 52%, transparent 0, transparent 4px, var(--text-color) 5px, var(--text-color) 6px, transparent 6px);
+        
+          width: 100%;
+          height: 300%;
+          top: 0;
+          left: 0;
+          position: absolute;
+          animation: bubbles 5s linear infinite both;
+        }
+        
+        @keyframes bubbles {
+          from {
+            transform: translate();
+          }
+          to {
+            transform: translate(0, -66.666%);
+          }
+        }
+</style>
+</head>
+<body>
+        <h1 class="header1 text-center text-white">The most advanced custom URL shortening technology</h1>
+        <br>
+        <br>
+        <div class="card-columns">
+            <div class="card bg-primary text-white text-center p-3">
+              <div class="card-body">
+                <h5 class="card-title">Reliable</h5>
+                <p class="card-text">99.9% Guaranteed service uptime Hosted in multiple countries on Amazon AWS</p>
+              </div>
+            </div>
+            <div class="card bg-primary text-white text-center p-3">
+                <div class="card-body">
+                  <h5 class="card-title">Scalable</h5>
+                  <p class="card-text">60 billion clicks tracked yearly (and counting) An infrastructure that's set up to grow with you</p>
+                </div>
+            </div>
+            <div class="card bg-primary text-white text-center p-3">
+                <div class="card-body">
+                  <h5 class="card-title">Fast</h5>
+                  <p class="card-text">Create up to 1,000 new branded short links per second Rapid autoscaling server clusters</p>
+                </div>
+              </div>
+              <div class="card bg-primary text-white text-center p-3">
+                <div class="card-body">
+                  <h5 class="card-title">Flexible</h5>
+                  <p class="card-text">18K+ Developers already using URL shortener APIs Thousands of dedicated projects</p>
+                </div>
+              </div>
+              <div class="card bg-primary text-white text-center p-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Safe</h5>
+                    <p class="card-text">Most advanced safety tools like 2FA - internal audits Monitored 24/7 by human and artificial intellegence</p>
+                  </div>
+                </div>
+                <div class="card bg-primary text-white text-center p-3">
+                  <div class="card-body">
+                    <h5 class="card-title">GDPR compliant</h5>
+                    <p class="card-text">Fully compliant with GDPR - EU privacy Data anonymized prior to database storage</p>
+                  </div>
+                </div>
+          </div>
+</body>
+
+{% endblock %}
+</html>
